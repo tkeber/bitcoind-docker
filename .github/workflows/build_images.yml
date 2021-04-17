@@ -23,7 +23,7 @@ jobs:
           SHORTREF=${GITHUB_SHA::8}
 
           # Set output parameters.
-          echo ::set-output name=tags::${VERSION}
+          echo ::set-output name=tags::"${DOCKER_IMAGE}:${VERSION}"
           echo ::set-output name=docker_image::${DOCKER_IMAGE}
 
       - name: Set up QEMU
