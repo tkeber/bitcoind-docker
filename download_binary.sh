@@ -16,8 +16,13 @@ esac
 
 dir="https://bitcoincore.org/bin/bitcoin-core-${version}/"
 
+gpg --import laanwj-releases.asc 
+
+
 curl -sko "SHA256SUMS.asc" "$dir/SHA256SUMS.asc"
 curl -sko "$archive" "$dir/$archive"
+
+gpg --verify SHA256SUMS.asc
 
 sha256sum --ignore-missing --check SHA256SUMS.asc
 

@@ -1,7 +1,7 @@
 FROM debian:buster-slim AS downloader
 ARG VERSION=0.21.0
 
-RUN apt update && apt install -y curl
+RUN apt update && apt install -y curl gpg
 COPY download_binary.sh .
 RUN bash download_binary.sh $VERSION
 
