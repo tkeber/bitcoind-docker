@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bitcoin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bitcoin
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: bitcoin
+    spec:
+      containers:
+      - args:
+        - --datadir=/var/data
+        image: tkeber/bitcoind-docker:latest
+        imagePullPolicy: IfNotPresent
+        name: bitcoin
+        volumeMounts:
+        - mountPath: /var/data
+          name: data
+      tolerations: []
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: bitcoin
